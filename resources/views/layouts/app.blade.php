@@ -88,13 +88,12 @@
                         </div>
                         <div class="form-group">
                             <label>Category</label>
-                            <select class="form-control">
-                                <option>None</option>
+                            <select name="category_id" class="form-control">
+                                {{--<option>None</option>--}}
 
                                 @foreach($categories as $category)
-                                    <option>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
-
                             </select>
                         </div>
                     </form>

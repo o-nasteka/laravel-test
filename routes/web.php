@@ -3,6 +3,7 @@
 use App\Task;
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,13 @@ Route::get('/', function () {
  */
 Route::post('/task', function (Request $request) {
     $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
+        'name' => 'required|max:255'
     ]);
+
+    $cat=Input::get('category_id');
+
+//    var_dump($cat);
+//    die();
 
     if ($validator->fails()) {
         return redirect('/')
@@ -43,9 +49,11 @@ Route::post('/task', function (Request $request) {
             ->withErrors($validator);
     }
 
+
     // Create task
     $task = new Task;
     $task->name = $request->name;
+    $task->category_id = $cat;
     $task->save();
 
     return redirect('/');

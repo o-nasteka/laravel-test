@@ -12,4 +12,12 @@ class Category extends Model
      * @var string
      */
     protected $table = 'categories';
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function getTask(){
+        return $this->hasOne('App\Task');
+    }
 }

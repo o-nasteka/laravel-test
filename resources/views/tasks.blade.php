@@ -28,7 +28,7 @@
                     <form id="delete-category" action="{{ url('category/'.$category->id) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                    <i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"></i>
+                    <i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"> </i>
                     </form>
                     {{--Delete Category END --}}
 
