@@ -83,3 +83,12 @@ Route::post('/category', function (Request $request) {
     return redirect('/');
 
 });
+
+/**
+ * Delete category
+ */
+Route::delete('/category/{category}', function (Category $category) {
+    $category->delete();
+
+    return redirect('/');
+});

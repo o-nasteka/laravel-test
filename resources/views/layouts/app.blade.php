@@ -7,7 +7,7 @@
     <!-- CSS и JavaScript -->
     <link href="{{ asset('/css/theme.css') }}" rel="stylesheet" type="text/css" >
 
-    <script src="{{ asset('/js/main.js') }}"></script>
+    {{--<script src="{{ asset('/js/main.js') }}"></script>--}}
 
 </head>
 
@@ -56,7 +56,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     Close
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                     Save changes
                 </button>
             </div>
@@ -90,9 +90,11 @@
                             <label>Category</label>
                             <select class="form-control">
                                 <option>None</option>
-                                <option>Category 1</option>
-                                <option>Category 2</option>
-                                <option>Category 3</option>
+
+                                @foreach($categories as $category)
+                                    <option>{{ $category->name }}</option>
+                                @endforeach
+
                             </select>
                         </div>
                     </form>

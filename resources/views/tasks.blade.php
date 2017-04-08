@@ -17,11 +17,25 @@
                 </button>
             </div>
             <div class="panel-body list-group">
+                <?php $i = 1;?>
                 @foreach ($categories as $category)
-                <a href="#" class="list-group-item">
-                    <span class="badge">3</span>
+                <a href="#" class="list-group-item <?php if($i == 1) echo 'active'; ?>">
+
+                    {{-- Category number 'badge' --}}
+                    <span class="badge"><?=$i?></span>
+
+                    {{--Delete Category --}}
+                    <form id="delete-category" action="{{ url('category/'.$category->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    <i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"></i>
+                    </form>
+                    {{--Delete Category END --}}
+
+                    {{-- Category name --}}
                     {{ $category->name }}
                 </a>
+                 <?php $i++;?>
                 @endforeach
             </div>
         </div>
