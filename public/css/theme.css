@@ -215,6 +215,13 @@ a:focus {
   margin-right: 5px;
   cursor: pointer;
 }
+.todo-list > li .tools > form > .glyphicon {
+  margin-right: 5px;
+  cursor: pointer;
+}
+#delete-task .tools{
+  margin-top: -15px;
+}
 .todo-list > li:hover .tools {
   display: inline-block;
 }

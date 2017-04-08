@@ -7,10 +7,12 @@
     <!-- CSS и JavaScript -->
     <link href="{{ asset('/css/theme.css') }}" rel="stylesheet" type="text/css" >
 
+    <script src="{{ asset('/js/main.js') }}"></script>
 
 </head>
 
 <body>
+<br>
 <div class="container">
     <!-- NAVBAR START -->
     <nav class="navbar navbar-default">
@@ -30,6 +32,9 @@
 </div>
 
 <!-- CATEGORY MODAL START -->
+<!-- Add new task form START -->
+<form action="{{ url('category') }}" method="POST" class="">
+    {{ csrf_field() }}
 <div id="create_category_modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -43,7 +48,7 @@
                 <form>
                     <div class="form-group">
                         <label>List Name</label>
-                        <input type="text" class="form-control" placeholder="List Name">
+                        <input type="text" name="category" class="form-control" placeholder="List Name" required>
                     </div>
                 </form>
             </div>
@@ -58,46 +63,53 @@
         </div>
     </div>
 </div>
+</form>
+<!-- Add new category form END -->
 <!-- CATEGORY MODAL END -->
 
 <!-- TASK MODAL START -->
-<div id="create_task_modal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Create New Task</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label>Task</label>
-                        <input type="text" class="form-control" placeholder="Task">
-                    </div>
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select class="form-control">
-                            <option>None</option>
-                            <option>Category 1</option>
-                            <option>Category 2</option>
-                            <option>Category 3</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                    Save changes
-                </button>
+<!-- Add new task form START -->
+<form action="{{ url('task') }}" method="POST" class="">
+    {{ csrf_field() }}
+    <div id="create_task_modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Create New Task</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Task</label>
+                            <input type="text" name="name" id="task-name" value="" class="form-control" placeholder="Task" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-control">
+                                <option>None</option>
+                                <option>Category 1</option>
+                                <option>Category 2</option>
+                                <option>Category 3</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Save changes
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
+<!-- Add new task form END -->
 <!-- TASK MODAL END -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
