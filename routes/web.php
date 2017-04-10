@@ -70,6 +70,17 @@ Route::delete('/task/{task}', function (Task $task) {
 });
 
 /**
+ * Update task
+ */
+Route::put('/task/{task}/edit', function (Task $task) {
+    $task->name = Input::get('name');
+    $task->category_id = Input::get('category_id');
+    $task->save();
+    return redirect('/');
+});
+
+
+/**
  * Add new category
  */
 Route::post('/category', function (Request $request) {

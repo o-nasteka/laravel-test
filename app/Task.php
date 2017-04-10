@@ -12,6 +12,6 @@ class Task extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function getCategory(){
-        return $this->hasOne('App\Category');
+        return $this->hasOne('App\Category', 'id', 'category_id');
     }
 }

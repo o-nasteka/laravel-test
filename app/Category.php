@@ -18,6 +18,6 @@ class Category extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function getTask(){
-        return $this->hasOne('App\Task');
+        return $this->hasMany('App\Task', 'category_id', 'id');
     }
 }

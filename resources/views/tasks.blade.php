@@ -25,11 +25,11 @@
                     <span class="badge"><?=$i?></span>
 
                     {{--Delete Category --}}
-                    <form id="delete-category" action="{{ url('category/'.$category->id) }}" method="POST">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                    <i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"> </i>
-                    </form>
+                    {{--<form id="delete-category" action="{{ url('category/'.$category->id) }}" method="POST">--}}
+                        {{--{{ csrf_field() }}--}}
+                        {{--{{ method_field('DELETE') }}--}}
+                    {{--<i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"> </i>--}}
+                    {{--</form>--}}
                     {{--Delete Category END --}}
 
                     {{-- Category name --}}
@@ -51,26 +51,25 @@
                         Create New Task
                     </button>
                 </div>
-                <div class="panel-body">
+                <div id="" class="panel-body">
                     <ul class="todo-list ui-sortable">
-
+                        <?php $i=0; ?>
                         @foreach ($tasks as $task)
-                            <li class="">
-                                <input type="checkbox" value="">
+                            <li class="main-task{{$i}}">
+                                <input onclick="checkList({{$i}});" class="task-list" type="checkbox" value="">
                                 <span class="text">{{ $task->name }}</span>
-                                {{--<small class="label label-danger">Category 1</small>--}}
+                                <small class="label <?php if($i % 2 == 0 ) echo 'label-success'; else echo 'label-danger';?> ">{{ $task->getCategory->name }}</small>
                                 <form id="delete-task" action="{{ url('task/'.$task->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <div class="tools">
-                                        <i data-toggle="modal" data-whatever="@mdo" data-target="#create_task_modal" class="glyphicon glyphicon glyphicon-pencil"></i>
+                                        <i data-toggle="modal" data-name="{{ $task->name }}" data-cat="{{ $task->getCategory->id }}" data-target="#update_task_modal" class="glyphicon glyphicon glyphicon-pencil"></i>
                                         <i onclick="document.getElementById('delete-task').submit();" class="glyphicon glyphicon-remove-circle"></i>
                                     </div>
                                 </form>
                             </li>
+                                <?php $i++; ?>
                         @endforeach
-
-
                     </ul>
                 </div>
         </div>
