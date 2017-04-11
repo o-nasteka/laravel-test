@@ -19,17 +19,20 @@
             <div class="panel-body list-group">
                 <?php $i = 1;?>
                 @foreach ($categories as $category)
+
                 <a href="#" class="list-group-item <?php if($i == 1) echo 'active'; ?>">
 
                     {{-- Category number 'badge' --}}
-                    <span class="badge"><?=$i?></span>
+                    <span class="badge">{{ $category->getTask->count() }}</span>
 
                     {{--Delete Category --}}
-                    {{--<form id="delete-category" action="{{ url('category/'.$category->id) }}" method="POST">--}}
-                        {{--{{ csrf_field() }}--}}
-                        {{--{{ method_field('DELETE') }}--}}
-                    {{--<i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"> </i>--}}
-                    {{--</form>--}}
+                    @if( $category->getTask->count() == 0 )
+                    <form id="delete-category" action="{{ url('category/'.$category->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    <i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"> </i>
+                    </form>
+                    @endif
                     {{--Delete Category END --}}
 
                     {{-- Category name --}}
@@ -59,12 +62,12 @@
                                 <input onclick="checkList({{$i}});" class="task-list" type="checkbox" value="">
                                 <span class="text">{{ $task->name }}</span>
                                 <small class="label <?php if($i % 2 == 0 ) echo 'label-success'; else echo 'label-danger';?> ">{{ $task->getCategory->name }}</small>
-                                <form id="delete-task" action="{{ url('task/'.$task->id) }}" method="POST">
+                                <form class="delete-task" id="delete-task{{$i}}" action="{{ url('task/'.$task->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <div class="tools">
                                         <i data-toggle="modal" data-name="{{ $task->name }}" data-cat="{{ $task->getCategory->id }}" data-target="#update_task_modal" class="glyphicon glyphicon glyphicon-pencil"></i>
-                                        <i onclick="document.getElementById('delete-task').submit();" class="glyphicon glyphicon-remove-circle"></i>
+                                        <i onclick="document.getElementById('delete-task{{$i}}').submit();" class="glyphicon glyphicon-remove-circle"></i>
                                     </div>
                                 </form>
                             </li>

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Laravel Quickstart - Basic</title>
+    <title>TO-DO List</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- CSS и JavaScript -->
     <link href="{{ asset('/css/theme.css') }}" rel="stylesheet" type="text/css" >
-
 
 </head>
 
@@ -31,9 +30,10 @@
 </div>
 
 <!-- CATEGORY MODAL START -->
-<!-- Add new task form START -->
-<form action="{{ url('category') }}" method="POST" class="">
+<!-- Add new category form START -->
+<form action="{{ url('category') }}" id="form-cat" method="POST" class="">
     {{ csrf_field() }}
+    <input type="hidden" id="token" value="{{ csrf_token() }}">
 <div id="create_category_modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -47,7 +47,7 @@
                 <form>
                     <div class="form-group">
                         <label>List Name</label>
-                        <input type="text" name="category" class="form-control" placeholder="List Name" required>
+                        <input id="category-name" type="text" name="category" class="form-control" placeholder="List Name" required>
                     </div>
                 </form>
             </div>
@@ -55,9 +55,9 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     Close
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <a href="#" data-id="" class="btn btn-primary category-add">
                     Save changes
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -101,9 +101,9 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         Close
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <a href="#" type="submit" class="btn btn-primary task-add">
                         Save changes
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -115,6 +115,7 @@
 
 <!-- UPDATE TASK MODAL START -->
 <!--  Update task form START -->
+@if(isset($task))
 <form action="{{ url('task/'.$task->id.'/edit') }}" method="POST" class="">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
@@ -157,6 +158,7 @@
         </div>
     </div>
 </form>
+@endif
 <!-- Update task form END -->
 <!-- Update TASK MODAL END -->
 

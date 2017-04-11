@@ -95,6 +95,7 @@ Route::post('/category', function (Request $request) {
     }
 
     // Create task
+
     $category = new Category();
     $category->name = $request->category;
     $category->save();

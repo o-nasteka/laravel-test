@@ -33,3 +33,30 @@ $('#update_task_modal').on('show.bs.modal', function (event) {
     modal.find('.modal-body #cat-name').val(cat);
 })
 
+// Add category
+$('.category-add').on('click', function (e) {
+    // Disable click on button action
+    e.preventDefault();
+
+    var category = $('#category-name').val();
+    var token = $('#token').val();
+
+    $.ajax({
+        type: 'POST',
+        url: '/category',
+        data: {
+            '_token': token,
+            'category' : category
+        } ,
+
+        success: function (data) {
+            $('#create_category_modal').modal('hide');
+            $('#form-cat').trigger("reset");
+            document.location.href = '/';
+        },
+        error: function (data) {
+            alert(data);
+        }
+    })
+});
+
