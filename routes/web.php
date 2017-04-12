@@ -34,29 +34,18 @@ Route::get('/', function () {
  * Add new task
  */
 Route::post('/task', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255'
-    ]);
 
-    $cat=Input::get('category_id');
-
-//    var_dump($cat);
-//    die();
-
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
-
+    $name = $request->input('task');
+    $cat = $request->input('category');
 
     // Create task
     $task = new Task;
-    $task->name = $request->name;
+    $task->name = $name;
     $task->category_id = $cat;
     $task->save();
 
-    return redirect('/');
+    $request->session()->flash('status', 'Task: "' . $task->name .'" was successfuly added!');
+    return $request;
 
 });
 
@@ -84,23 +73,14 @@ Route::put('/task/{task}/edit', function (Task $task) {
  * Add new category
  */
 Route::post('/category', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-        'category' => 'required|max:255',
-    ]);
 
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
-
-    // Create task
-
+    // Create category
     $category = new Category();
     $category->name = $request->category;
     $category->save();
 
-    return redirect('/');
+    $request->session()->flash('status', 'Category: "' . $category->name .'" was successfuly added!');
+    return $request;
 
 });
 

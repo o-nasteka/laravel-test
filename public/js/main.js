@@ -1,3 +1,23 @@
+// Disable enter submit
+$(document).on('keyup keypress', 'form input[type="text"]', function(e) {
+    if(e.keyCode == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Confirm Delete Task
+function confirmDelete(name) {
+    var answer = confirm("Are you sure you want to delete?");
+    if (answer) {
+        console.log(name);
+        $(name).submit();
+        return true;
+    }
+    else
+        return false;
+}
+
 
 // add Check List Done class
 function checkList1(e){
@@ -39,7 +59,7 @@ $('.category-add').on('click', function (e) {
     e.preventDefault();
 
     var category = $('#category-name').val();
-    var token = $('#token').val();
+    var token = $('#cat-token').val();
 
     $.ajax({
         type: 'POST',
@@ -50,8 +70,42 @@ $('.category-add').on('click', function (e) {
         } ,
 
         success: function (data) {
+            //$('#cat-body').append(new_cat);
             $('#create_category_modal').modal('hide');
             $('#form-cat').trigger("reset");
+            document.location.href = '/';
+        },
+        error: function (data) {
+            alert(data);
+        }
+    })
+});
+
+// Add task
+$('.task-add').on('click', function (e) {
+    // Disable click on button action
+    e.preventDefault();
+
+    var task = $('#task-name').val();
+    var category = $('#cat-name').val();
+    var token = $('#task-token').val();
+
+   //console.log(token);
+   //console.log(category);
+
+    $.ajax({
+        type: 'POST',
+        url: '/task',
+        data: {
+            '_token': token,
+            'task' : task,
+            'category' : category
+        } ,
+
+        success: function (data) {
+            //console.log(data);
+            $('#create_task_modal').modal('hide');
+            $('#form-task').trigger("reset");
             document.location.href = '/';
         },
         error: function (data) {

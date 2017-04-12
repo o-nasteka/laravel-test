@@ -21,7 +21,21 @@
         </div>
     </nav>
     <!-- NAVBAR END -->
+
+
+
+
 </div>
+
+{{-- Session Message --}}
+@if(Session::has('status'))
+    <div class="container">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ Session::get('status') }}
+        </div>
+    </div>
+@endif
 
 <div class="container">
 <!-- CONTENT START -->
@@ -33,7 +47,7 @@
 <!-- Add new category form START -->
 <form action="{{ url('category') }}" id="form-cat" method="POST" class="">
     {{ csrf_field() }}
-    <input type="hidden" id="token" value="{{ csrf_token() }}">
+    <input type="hidden" id="cat-token" value="{{ csrf_token() }}">
 <div id="create_category_modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -68,8 +82,9 @@
 
 <!-- TASK MODAL START -->
 <!-- Add new task form START -->
-<form action="{{ url('task') }}" method="POST" class="">
+<form id="form-task" action="{{ url('task') }}" method="POST" class="">
     {{ csrf_field() }}
+    <input type="hidden" id="task-token" value="{{ csrf_token() }}">
     <div id="create_task_modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -101,7 +116,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         Close
                     </button>
-                    <a href="#" type="submit" class="btn btn-primary task-add">
+                    <a href="#" class="btn btn-primary task-add">
                         Save changes
                     </a>
                 </div>

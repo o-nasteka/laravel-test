@@ -16,7 +16,7 @@
                     Create New Category
                 </button>
             </div>
-            <div class="panel-body list-group">
+            <div id="cat-body" class="panel-body list-group">
                 <?php $i = 1;?>
                 @foreach ($categories as $category)
 
@@ -27,10 +27,11 @@
 
                     {{--Delete Category --}}
                     @if( $category->getTask->count() == 0 )
-                    <form id="delete-category" action="{{ url('category/'.$category->id) }}" method="POST">
+                    <form id="delete-category{{$i}}" action="{{ url('category/'.$category->id) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                    <i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"> </i>
+                    {{--<i onclick="document.getElementById('delete-category').submit();" class="glyphicon glyphicon-remove-circle pull-right"> </i>--}}
+                    <i onclick="confirmDelete('#delete-category{{$i}}');" class="glyphicon glyphicon-remove-circle pull-right"> </i>
                     </form>
                     @endif
                     {{--Delete Category END --}}
@@ -67,7 +68,8 @@
                                     {{ method_field('DELETE') }}
                                     <div class="tools">
                                         <i data-toggle="modal" data-name="{{ $task->name }}" data-cat="{{ $task->getCategory->id }}" data-target="#update_task_modal" class="glyphicon glyphicon glyphicon-pencil"></i>
-                                        <i onclick="document.getElementById('delete-task{{$i}}').submit();" class="glyphicon glyphicon-remove-circle"></i>
+                                        {{--<i onclick="document.getElementById('delete-task{{$i}}').submit();" class="glyphicon glyphicon-remove-circle"></i>--}}
+                                        <i onclick="confirmDelete('#delete-task{{$i}}');" class="glyphicon glyphicon-remove-circle"></i>
                                     </div>
                                 </form>
                             </li>
