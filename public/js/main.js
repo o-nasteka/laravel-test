@@ -70,6 +70,10 @@ $('.category-add').on('click', function (e) {
         } ,
 
         success: function (data) {
+            //var new_cat =
+            //    '<a href="#" class="list-group-item">'
+            //    +  '<span class="badge">0</span>'
+            //    + category + '</a>';
             //$('#cat-body').append(new_cat);
             $('#create_category_modal').modal('hide');
             $('#form-cat').trigger("reset");
